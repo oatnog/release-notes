@@ -1,0 +1,87 @@
+<style type="text/css">
+
+.fieldWrapper {
+	width: 4em;
+	float: left;
+	text-align: right;
+	margin-right: 0.5em;
+	display: block
+}
+
+
+table.display {
+	border-width: thin thin thin thin;
+	border-spacing: 2px;
+	border-style: outset outset outset outset;
+	border-color: gray gray gray gray;
+	border-collapse: separate;
+	background-color: white;
+}
+table.display th {
+	border-width: 1px 1px 1px 1px;
+	padding: 1px 1px 1px 1px;
+	border-style: dotted dotted dotted dotted;
+	border-color: gray gray gray gray;
+	background-color: white;
+}
+table.display td {
+	border-width: 1px 1px 1px 1px;
+	padding: 1px 1px 1px 1px;
+	border-style: dotted dotted dotted dotted;
+	border-color: gray gray gray gray;
+	background-color: white;
+}
+
+table.highlight td {
+	border-width: 1px 1px 1px 1px;
+	padding: 1px 1px 1px 1px;
+	border-style: dotted dotted dotted dotted;
+	border-color: gray gray gray gray;
+	background-color: yellow;
+}
+
+/* stolen */
+
+body {
+    font-family: georgia;
+}
+.container {
+    width: 80%;
+    margin-top: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* note_list.html */
+.labels {
+    text-align: center;
+    border: 1px solid grey;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+}
+.list {
+    border: 1px solid grey;
+}
+.list h2 {
+    text-align: center;
+}
+/* note_detail.html */
+.header {
+    margin-bottom: 2em;
+}
+.detail .text {
+    text-align: center;
+}
+.detail textarea {
+    margin-top: 1em;
+    width: 100%;
+    height: 300px;
+}
+.detail .submit {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+
+
+</style>

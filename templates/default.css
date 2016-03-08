@@ -1,0 +1,26 @@
+<style type="text/css">
+table.display {
+	border-width: thin thin thin thin;
+	border-spacing: 2px;
+	border-style: outset outset outset outset;
+	border-color: gray gray gray gray;
+	border-collapse: separate;
+	background-color: white;
+}
+table.display th {
+	border-width: 1px 1px 1px 1px;
+	padding: 1px 1px 1px 1px;
+	border-style: dotted dotted dotted dotted;
+	border-color: gray gray gray gray;
+	background-color: white;
+	-moz-border-radius: 0px 0px 0px 0px;
+}
+table.display td {
+	border-width: 1px 1px 1px 1px;
+	padding: 1px 1px 1px 1px;
+	border-style: dotted dotted dotted dotted;
+	border-color: gray gray gray gray;
+	background-color: white;
+	-moz-border-radius: 0px 0px 0px 0px;
+}
+</style>

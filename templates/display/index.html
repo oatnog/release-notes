@@ -1,0 +1,42 @@
+<html>
+
+  <head>
+    <title>Changelist Report</title>
+    <link rel="stylesheet" type="text/css"
+      href="/static_files/default.css" />
+
+  </head>
+
+<body>
+
+<h3>Changelist report</h3>
+<!-- Dunno how to pass the form data on
+<form action="/display/" method="POST">
+<input type="submit" name="displaytype" value="Generate CSV" />
+</form>
+-->
+
+<table class=display>
+<tr><th>Change</th><th>Description</th></tr>
+<tr>
+<!-- {% regroup range_changes|dictsort:"change" by change as sorted_changes %} -->
+{% for changenum in range_changes|dictsortreversed:"change" %}
+	<td class=highlight><a href="http://mtv-fisheye:8060/changelog/Core2/?cs={{ changenum.change }}">{{ changenum.change }}</a> </td> 
+	<td>{{ changenum.desc }} </td> </tr>
+	{% for bzbug in changenum.bzbugs %}
+	  <tr><td></td><td><a href="http://sfo-bugzilla.opentv.com/show_bug.cgi?id={{bzbug.id}}">{{bzbug.id}}</a> {{bzbug.summary}}</td></tr>
+	{% endfor %}
+	{% for changed_dir in changenum.changed_dirs %}
+	  <tr><td></td><td>{{changed_dir}}</td></tr>
+	{% endfor %}
+<tr>
+{% endfor %}
+</table>
+
+
+
+</p>
+
+</body>
+
+</html>

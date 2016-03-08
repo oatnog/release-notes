@@ -1,0 +1,109 @@
+<html>
+
+<head>
+<title>{% block title %}Release Notes Generator{% endblock %}</title>
+    <link rel="stylesheet" type="text/css"
+      href="/static_files/default.css" />
+      
+    <script type="text/javascript">
+	
+	function addEvent( obj, type, fn ) {
+	  if ( obj.attachEvent ) {
+		obj['e'+type+fn] = fn;
+		obj[type+fn] = function(){obj['e'+type+fn]( window.event );}
+		obj.attachEvent( 'on'+type, obj[type+fn] );
+	  } else
+		obj.addEventListener( type, fn, false );
+	}
+	function removeEvent( obj, type, fn ) {
+	  if ( obj.detachEvent ) {
+		obj.detachEvent( 'on'+type, obj[type+fn] );
+		obj[type+fn] = null;
+	  } else
+		obj.removeEventListener( type, fn, false );
+	}
+
+	</script>       
+      
+</head>
+
+<body class="container">
+<h3>Release Notes Generator</h3>
+<a href="http://engwiki:8080/display/ISOREL/Release+Notes+Generator">Help</a>
+
+
+
+<form class="labels" action="/changes/" method="POST">
+    <div class="fieldWrapper">
+        {{ depotform.depotspec.errors }}
+        <label for="id_depotspec">Depot Spec:</label>
+        {{ depotform.depotspec }}
+	{{ depotform.depotspec_list }}
+	<input type="submit" name="update" value="Update Labels" />
+    
+    </div>
+    
+<form class="labels" action="/changes/" method="POST">    
+    <div class="fieldWrapper">
+        {{ labelform.labelone.errors }}
+        <label for="id_labelone">Starting Label (or change #):</label>
+        {{ labelform.labelone }}
+	{{ labelform.labelone_list }}
+    </div>
+    <div class="fieldWrapper">
+        {{ labelform.labeltwo.errors }}
+        <label for="id_labeltwo">Ending Label (or change #):</label>
+        {{ labelform.labeltwo }}
+	{{ labelform.labeltwo_list }}
+    </div>   
+
+<input type="submit" name="displaytype" value="Submit" />
+<input type="submit" name="displaytype" value="Generate CSV" />
+</form>
+
+<p align="center">Results may take up to a minute to display. Please be patient.</p>
+
+{%if range_changes %}
+<table class=display>
+<tr><th>Change</th><th>Description</th></tr>
+<tr>
+<!-- {% regroup range_changes|dictsort:"change" by change as sorted_changes %} -->
+{% for changenum in range_changes|dictsortreversed:"change" %}
+	<td class="{% cycle 'highlight' 'display' %}"><a href="http://mtv-fisheye:8060/changelog/OTV_OS?cs={{ changenum.change }}">{{ changenum.change }}</a> </td> 
+	<td>CL Description: {{ changenum.desc }} </td> </tr>
+	{% if changenum.badbugs %}
+	  <tr><td></td><td><strong>Nonexistent bug(s) listed in change description!</strong> 
+	  {% for badbug in changenum.badbugs %} {{badbug}} {% endfor %}</td></tr> 
+	{% endif %}
+	{% if changenum.bzbugs %}
+		{% for bzbug in changenum.bzbugs %}
+		  <tr><td></td><td>PR Synopsis: <a href="http://sfo-bugzilla.opentv.com/show_bug.cgi?id={{bzbug.id}}">{{bzbug.id}}</a> {{bzbug.summary}}</td></tr>
+		{% endfor %}
+	{% else %}
+		<tr><td></td><td>PR Synopsis: <strong>No PRs found in change description</strong></td></tr>
+	{% endif %}
+		
+	{% for changed_dir in changenum.changed_dirs %}
+	  <tr><td></td><td>Directory: {{changed_dir}}</td></tr> 
+	{% endfor %}
+<tr>
+{% endfor %}
+</table>
+{% endif %}
+
+
+<script>
+addEvent(document.getElementById('depotspec_list'), 'change', function(event) {
+	document.getElementById('depotspec').value = document.getElementById('depotspec_list').value;
+});
+
+addEvent(document.getElementById('labelone_list'), 'change', function(event) {
+	document.getElementById('labelone').value = document.getElementById('labelone_list').value;
+});
+
+addEvent(document.getElementById('labeltwo_list'), 'change', function(event) {
+	document.getElementById('labeltwo').value = document.getElementById('labeltwo_list').value;
+});
+</script>
+</body>
+</html>
