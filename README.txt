@@ -1,4 +1,4 @@
-*Deploying the Release Notes Generator*
+**Deploying the Release Notes Generator**
 
 It's based on the Python web framework Django, so install that first.
 
@@ -13,7 +13,7 @@ release-notes/relnotes/settings.py
 Edit this file, putting in valid logins/passwords for Perforce and Bugzilla (may be read-only users):
 release-notes/relnotes/changesgrabber/models.py
 
-*Debugging/Maintaining the Release Notes Generator*
+**Debugging/Maintaining the Release Notes Generator**
 
 From the release-notes/relnotes directory, run 'manage.py runserver'. This will create the database tables if they don't exist already, then run the webapp on the port it displays.
 
